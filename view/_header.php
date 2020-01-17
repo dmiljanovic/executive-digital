@@ -4,8 +4,14 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     <a class="nav-item nav-link" href="/">Home</a>
-                    <a class="nav-item nav-link" href="/register">Register</a>
-                    <a class="nav-item nav-link" href="/login">Login</a>
+                    <?php
+                    if(!\App\Helpers\Session::GetKey('userId') && !\App\Helpers\Session::GetKey('userEmail')) {
+                        echo('
+                            <a class="nav-item nav-link" href="/register">Register</a><br>
+                            <a class="nav-item nav-link" href="/login">Login</a>
+                        ');
+                    }
+                    ?>
                     <?php
                     if(\App\Helpers\Session::GetKey('userId') && \App\Helpers\Session::GetKey('userEmail')) {
                         echo('
