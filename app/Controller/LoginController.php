@@ -56,7 +56,7 @@ class LoginController extends BaseController
         $data = [];
 
         $data['email']      = Validation::sanitizeData($_REQUEST['email']);
-        $data['password']   = Validation::sanitizeData($_REQUEST['password']);
+        $data['password']   = hash('sha256',Validation::sanitizeData($_REQUEST['password']));
         $data['confirmed']  = 1;
 
         return $data;

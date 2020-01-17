@@ -21,7 +21,7 @@ class RegisterRepository extends Db
     {
         $param = [
             'email'         => $data['email'],
-            'password'      => $data['password'],
+            'password'      => hash('sha256',$data['password']),
             'token'         => $token,
             'confirmed'     => 0,
             'created_at'    => date('Y-m-d H:i:s')
