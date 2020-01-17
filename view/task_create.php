@@ -26,7 +26,7 @@
     </div>
     <div class="row">
         <div class="col-lg-6 mt-2">
-            <form  action="/task_create" method="post">
+            <form name="task_create" action="/task_create" method="post">
                 <div class="form-group">
                     <label for="title">Title</label>
                     <input type="text" class="form-control" name="title" id="title" placeholder="Title">
@@ -64,11 +64,34 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous">
 </script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
 <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
 <script>
     $(document).ready(function () {
         $('#due_date').datepicker({
             uiLibrary: 'bootstrap4'
+        });
+
+        $(function() {
+            $("form[name='task_create']").validate({
+                rules: {
+                    title: {
+                        required: true,
+                        minlength: 3
+                    },
+                    description: {
+                        required: true,
+                        minlength: 15
+                    },
+                    due_date: {
+                        required: true,
+                        date: true
+                    },
+                    col: {
+                        required: true
+                    }
+                }
+            });
         });
     })
 </script>

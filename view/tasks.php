@@ -69,8 +69,5 @@ if(!\App\Helpers\Session::GetKey('userId') && !\App\Helpers\Session::GetKey('use
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous">
 </script>
-<script>
-    $(document).ready(function () {}
-</script>
 </body>
 </html>

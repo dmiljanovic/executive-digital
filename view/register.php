@@ -20,7 +20,7 @@
     </div>
     <div class="row">
         <div class="col-lg-6 mt-5">
-            <form  action="/registration" method="post">
+            <form name="register" action="/registration" method="post">
                 <div class="form-group">
                     <label for="email">Email address</label>
                     <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Enter email">
@@ -41,8 +41,24 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous">
 </script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
 <script>
-    $(document).ready(function () {}
+    $(document).ready(function () {
+        $(function() {
+            $("form[name='register']").validate({
+                rules: {
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    password: {
+                        required: true,
+                        minlength: 5
+                    }
+                }
+            });
+        });
+    });
 </script>
 </body>
 </html>
