@@ -57,9 +57,9 @@ Route::add('/task_create', function () {
     $taskCtrl->createTask();
 });
 
-Route::add('/task/([0-9]*)/edit', function () {
+Route::add('/task/([0-9]*)/edit', function ($taskId) {
     $taskCtrl = new TaskController(new TaskRepository());
-    $taskCtrl->editTask();
+    $taskCtrl->editTask($taskId);
 });
 
 Route::add('/task_update', function () {
@@ -67,14 +67,14 @@ Route::add('/task_update', function () {
     $taskCtrl->updateTask();
 });
 
-Route::add('/task/([0-9]*)/view', function () {
+Route::add('/task/([0-9]*)/view', function ($taskId) {
     $taskCtrl = new TaskController(new TaskRepository());
-    $taskCtrl->viewTask();
+    $taskCtrl->viewTask($taskId);
 });
 
-Route::add('/task/([0-9]*)/delete', function () {
+Route::add('/task/([0-9]*)/delete', function ($taskId) {
     $taskCtrl = new TaskController(new TaskRepository());
-    $taskCtrl->deleteTask();
+    $taskCtrl->deleteTask($taskId);
 });
 
 Route::run('/');

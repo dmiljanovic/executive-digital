@@ -77,6 +77,10 @@ class TaskController extends BaseController
     {
         $data = [];
 
+        if (isset($_REQUEST['id'])) {
+            $data['id'] = Validation::sanitizeData($_REQUEST['id']);
+        }
+
         $data['title']          = Validation::sanitizeData($_REQUEST['title']);
         $data['description']    = Validation::sanitizeData($_REQUEST['description']);
         $data['due_date']       = Validation::sanitizeData($_REQUEST['due_date']);;
@@ -84,5 +88,41 @@ class TaskController extends BaseController
         $data['blocked']        = isset($_REQUEST['blocked']) ? 1 : 0;
 
         return $data;
+    }
+
+    /**
+     * Method for showing edit task form.
+     *
+     * @param string $taskId
+     */
+    public function editTask($taskId)
+    {
+        try {
+            $task = $this->repo->getTask((int)$taskId);
+        } catch (\Exception $exception) {
+            Analog::log('Error while fetching all tasks from db: ' . $exception);
+            var_dump($exception);
+            die();
+        }
+
+        $this->createView('task_edit', $task);
+    }
+
+    /**
+     * Method for updating task.
+     */
+    public function updateTask()
+    {
+        $data = $this->prepareData();
+
+        try {
+            $this->repo->updateTask($data);
+        } catch (\Exception $exception) {
+            Analog::log('Error while fetching all tasks from db: ' . $exception);
+            var_dump($exception);
+            die();
+        }
+
+        header("location: tasks");
     }
 }
