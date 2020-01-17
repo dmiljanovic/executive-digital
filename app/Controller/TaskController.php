@@ -31,12 +31,13 @@ class TaskController extends BaseController
      */
     public function allTasks()
     {
+        $tasks = [];
+
         try {
             $tasks = $this->repo->getTasks();
         } catch (\Exception $exception) {
             Analog::log('Error while fetching all tasks from db: ' . $exception);
-            var_dump($exception);
-            die();
+            flash()->error('Error while fetching all tasks from db. Please contact your admin.');
         }
 
         $this->createView('tasks', $tasks);
@@ -58,14 +59,15 @@ class TaskController extends BaseController
         $data = $this->prepareData();
 
         try {
-            $this->repo->createTask($data);
+            if ($this->repo->createTask($data)) {
+                header("location: tasks");
+                flash()->success('Successfully created task!');
+            }
         } catch (\Exception $exception) {
-            Analog::log('Error while fetching all tasks from db: ' . $exception);
-            var_dump($exception);
-            die();
+            Analog::log('Error while storing new record tasks in db: ' . $exception);
+            header("location: tasks");
+            flash()->error('Error while storing new record tasks in db. Please contact your admin.');
         }
-
-        header("location: tasks");
     }
 
     /**
@@ -101,8 +103,8 @@ class TaskController extends BaseController
             $task = $this->repo->getTask((int)$taskId);
         } catch (\Exception $exception) {
             Analog::log('Error while fetching task from db: ' . $exception);
-            var_dump($exception);
-            die();
+            header("location: ../../tasks");
+            flash()->error('Error while fetching task from db. Please contact your admin.');
         }
 
         $this->createView('task_edit', $task);
@@ -116,14 +118,15 @@ class TaskController extends BaseController
         $data = $this->prepareData();
 
         try {
-            $this->repo->updateTask($data);
+            if ($this->repo->updateTask($data)) {
+                header("location: tasks");
+                flash()->success('Successfully updated task!');
+            }
         } catch (\Exception $exception) {
             Analog::log('Error while updating task in db: ' . $exception);
-            var_dump($exception);
-            die();
+            header("location: ../../tasks");
+            flash()->error('Error while updating task in db. Please contact your admin.');
         }
-
-        header("location: tasks");
     }
 
     /**
@@ -137,8 +140,8 @@ class TaskController extends BaseController
             $task = $this->repo->getTask((int)$taskId);
         } catch (\Exception $exception) {
             Analog::log('Error while fetching task from db: ' . $exception);
-            var_dump($exception);
-            die();
+            header("location: ../../tasks");
+            flash()->error('Error while fetching task from db. Please contact your admin.');
         }
 
         $this->createView('task_view', $task);
@@ -152,13 +155,14 @@ class TaskController extends BaseController
     public function deleteTask($taskId)
     {
         try {
-            $this->repo->deleteTask((int)$taskId);
+            if ($this->repo->deleteTask((int)$taskId)) {
+                header("location: ../../tasks");
+                flash()->success('Successfully deleted task!');
+            }
         } catch (\Exception $exception) {
             Analog::log('Error while deleting task from db: ' . $exception);
-            var_dump($exception);
-            die();
+            header("location: ../../tasks");
+            flash()->error('Error while deleting task from db. Please contact your admin.');
         }
-
-        header("location: ../../tasks");
     }
 }

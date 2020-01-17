@@ -6,6 +6,7 @@
     },
     "require": {
         "analog/analog": "^1.0",
-        "phpmailer/phpmailer": "^6.1"
+        "phpmailer/phpmailer": "^6.1",
+        "tamtamchik/simple-flash": "^1.2"
     }
 }

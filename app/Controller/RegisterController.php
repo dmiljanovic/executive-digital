@@ -31,17 +31,20 @@ class RegisterController extends BaseController
         $token = md5(time());
 
         try {
-            $repo->beginRegistration($data, $token);
+            $res = $repo->beginRegistration($data, $token);
         } catch (\Exception $exception) {
-            Analog::log('Error while register exchange user to db: ' . $exception);
-            var_dump($exception);
-            die();
+            Analog::log('Error while register user to db: ' . $exception);
+            header("location: register");
+            flash()->error('Error while register user to db. Please contact your admin.');
         }
 
-        $body = "<a href='".($_SERVER["HTTP_HOST"]."/confirm_registration?token=".$token)."'>Please confirm your registration with this link</a>";
-        Mail::send($body);
+        if ($res) {
+            $body = "<a href='".($_SERVER["HTTP_HOST"]."/confirm_registration?token=".$token)."'>Please confirm your registration with this link</a>";
+            Mail::send($body);
 
-        header("location: login");
+            header("location: login");
+            flash()->success('Successfully send confirmation mail. Please check your mail box.');
+        }
     }
 
     /**
@@ -68,13 +71,14 @@ class RegisterController extends BaseController
         $token = Validation::sanitizeData($_REQUEST['token']);
 
         try {
-            $repo->confirmRegistration($token);
+            if ($repo->confirmRegistration($token)) {
+                header("location: login");
+                flash()->success('Successfully confirmed user!');
+            };
         } catch (\Exception $exception) {
-            Analog::log('Error while register exchange user to db: ' . $exception);
-            var_dump($exception);
-            die();
+            Analog::log('Error while confirming user to db: ' . $exception);
+            header("location: register");
+            flash()->error('Error while confirming user to db. Please contact your admin.');
         }
-
-        header("location: login");
     }
 }

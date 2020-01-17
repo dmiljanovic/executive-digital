@@ -96,7 +96,7 @@ class Db
      *
      * @param string $query
      * @param array $params
-     * @return array
+     * @return mixed
      */
     public static function getObject($query, $params = array())
     {

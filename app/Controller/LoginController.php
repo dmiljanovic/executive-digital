@@ -32,17 +32,18 @@ class LoginController extends BaseController
         try {
             $user = $repo->getUser($data);
         } catch (\Exception $exception) {
-            Analog::log('Error while faching user from db: ' . $exception);
-            var_dump($exception);
-            die();
+            Analog::log('Error while fetching user from db: ' . $exception);
+            header("location: tasks");
+            flash()->error('Error while fetching user from db. Please contact your admin.');
         }
 
         if ($user) {
             Session::SetKey("userId", $user->id);
             Session::SetKey("userEmail", $user->email);
-        }
 
-        header("location: tasks");
+            header("location: tasks");
+            flash()->success('Successfully logged!');
+        }
     }
 
     /**
@@ -66,7 +67,8 @@ class LoginController extends BaseController
      */
     public function logout()
     {
-        session_destroy();
         header("location: login");
+        flash()->success('Successfully logged out!');
+        session_destroy();
     }
 }

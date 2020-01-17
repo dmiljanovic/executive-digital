@@ -25,3 +25,8 @@
         </nav>
     </div>
 </div>
+<div class="row">
+    <div class="col-lg-12 mt-1">
+        <?php echo flash()->display() ?>
+    </div>
+</div>
