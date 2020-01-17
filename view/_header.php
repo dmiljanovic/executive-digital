@@ -10,7 +10,7 @@
                     if(\App\Helpers\Session::GetKey('userId') && \App\Helpers\Session::GetKey('userEmail')) {
                         echo('
                                 <a class="nav-item nav-link" href="/logout">Logout</a><br>
-                                <a class="nav-item nav-link" href="/task">Tasks</a>
+                                <a class="nav-item nav-link" href="/tasks">Tasks</a>
                         ');
                     }
                     ?>

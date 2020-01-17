@@ -5,6 +5,7 @@ use App\Controller\HomeController;
 use App\Controller\RegisterController;
 use App\Controller\LoginController;
 use App\Controller\TaskController;
+use App\Repositories\TaskRepository;
 
 Route::add('/', function () {
     $homeCtrl = new HomeController();
@@ -41,9 +42,39 @@ Route::add('/logout', function () {
     $loginCtrl->logout();
 });
 
-Route::add('/task', function () {
-    $taskCtrl = new TaskController();
+Route::add('/tasks', function () {
+    $taskCtrl = new TaskController(new TaskRepository());
     $taskCtrl->allTasks();
+});
+
+Route::add('/task', function () {
+    $taskCtrl = new TaskController(new TaskRepository());
+    $taskCtrl->newTask();
+});
+
+Route::add('/task_create', function () {
+    $taskCtrl = new TaskController(new TaskRepository());
+    $taskCtrl->createTask();
+});
+
+Route::add('/task/([0-9]*)/edit', function () {
+    $taskCtrl = new TaskController(new TaskRepository());
+    $taskCtrl->editTask();
+});
+
+Route::add('/task_update', function () {
+    $taskCtrl = new TaskController(new TaskRepository());
+    $taskCtrl->updateTask();
+});
+
+Route::add('/task/([0-9]*)/view', function () {
+    $taskCtrl = new TaskController(new TaskRepository());
+    $taskCtrl->viewTask();
+});
+
+Route::add('/task/([0-9]*)/delete', function () {
+    $taskCtrl = new TaskController(new TaskRepository());
+    $taskCtrl->deleteTask();
 });
 
 Route::run('/');

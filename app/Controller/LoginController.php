@@ -32,7 +32,7 @@ class LoginController extends BaseController
         try {
             $user = $repo->getUser($data);
         } catch (\Exception $exception) {
-            Analog::log('Error while register exchange user to db: ' . $exception);
+            Analog::log('Error while faching user from db: ' . $exception);
             var_dump($exception);
             die();
         }
@@ -42,7 +42,7 @@ class LoginController extends BaseController
             Session::SetKey("userEmail", $user->email);
         }
 
-        header("location: task");
+        header("location: tasks");
     }
 
     /**
