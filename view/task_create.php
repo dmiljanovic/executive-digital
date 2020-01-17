@@ -33,8 +33,7 @@
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea class="form-control" id="description" name="description">Description
-                    </textarea>
+                    <textarea class="form-control" id="description" name="description">Description</textarea>
                 </div>
                 <div class="form-group">
                     <label for="due_date">Due Date</label>

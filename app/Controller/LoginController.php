@@ -43,6 +43,9 @@ class LoginController extends BaseController
 
             header("location: tasks");
             flash()->success('Successfully logged!');
+        } else {
+            header("location: login");
+            flash()->info('Ther is no user with provided credentials!');
         }
     }
 
