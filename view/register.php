@@ -15,7 +15,12 @@
     <?php include '_header.php'?>
     <div class="row">
         <div class="col-lg-6 mt-5">
-            <form  action="" method="get">
+            <h5>Registration</h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 mt-5">
+            <form  action="/registration" method="post">
                 <div class="form-group">
                     <label for="email">Email address</label>
                     <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Enter email">

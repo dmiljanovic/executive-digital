@@ -90,4 +90,20 @@ class Db
 
         return $data;
     }
+
+    /**
+     * Static method for prepare, execute and fetch query statement.
+     *
+     * @param string $query
+     * @param array $params
+     * @return array
+     */
+    public static function getObject($query, $params = array())
+    {
+        $stmt = self::con()->prepare($query);
+        $stmt->execute($params);
+        $data = $stmt->fetchObject();
+
+        return $data;
+    }
 }

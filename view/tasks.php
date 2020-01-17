@@ -11,27 +11,23 @@
     <title>Executive Digital</title>
 </head>
 <body>
+
+<?php
+if(!\App\Helpers\Session::GetKey('userId') && !\App\Helpers\Session::GetKey('userEmail')) {
+    die("Unauthorized user");
+}
+?>
+
 <div class="container">
     <?php include '_header.php'?>
     <div class="row">
         <div class="col-lg-6 mt-5">
-            <h5>Login</h5>
+            <h5>Tasks</h5>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-6 mt-5">
-            <form  action="/logging_in" method="get">
-                <div class="form-group">
-                    <label for="email">Email address</label>
-                    <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Enter email">
-                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-                </div>
-                <button type="submit" name="btn_registration" class="btn btn-primary">Submit</button>
-            </form>
+            Tasks
         </div>
     </div>
 </div>
