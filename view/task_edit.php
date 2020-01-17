@@ -16,12 +16,17 @@
     <?php include '_header.php'?>
     <div class="row">
         <div class="col-lg-6 mt-5">
-            <h5>New Task</h5>
+            <h5>Edit Task</h5>
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-6 mt-5">
-            <form  action="/task_update" method="get">
+        <div class="col-lg-6 mt-2">
+            <a class="btn btn-danger float-right" href="../../tasks" role="button">Cancel</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 mt-2">
+            <form  action="/task_update" method="post">
                 <input type="hidden" name="id" id="id" value="<?php echo $data->id ?>">
                 <div class="form-group">
                     <label for="title">Title</label>

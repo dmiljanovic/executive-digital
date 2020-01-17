@@ -70,7 +70,7 @@ class TaskRepository extends Db
     }
 
     /**
-     * Method for getting updating existing task record in db.
+     * Method for updating existing task record in db.
      *
      * @param array $data
      * @return bool

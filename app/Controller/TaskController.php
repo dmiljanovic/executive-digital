@@ -100,7 +100,7 @@ class TaskController extends BaseController
         try {
             $task = $this->repo->getTask((int)$taskId);
         } catch (\Exception $exception) {
-            Analog::log('Error while fetching all tasks from db: ' . $exception);
+            Analog::log('Error while fetching task from db: ' . $exception);
             var_dump($exception);
             die();
         }
@@ -118,11 +118,29 @@ class TaskController extends BaseController
         try {
             $this->repo->updateTask($data);
         } catch (\Exception $exception) {
-            Analog::log('Error while fetching all tasks from db: ' . $exception);
+            Analog::log('Error while updating task in db: ' . $exception);
             var_dump($exception);
             die();
         }
 
         header("location: tasks");
+    }
+
+    /**
+     * Method for showing view task.
+     *
+     * @param string $taskId
+     */
+    public function viewTask($taskId)
+    {
+        try {
+            $task = $this->repo->getTask((int)$taskId);
+        } catch (\Exception $exception) {
+            Analog::log('Error while fetching task from db: ' . $exception);
+            var_dump($exception);
+            die();
+        }
+
+        $this->createView('task_view', $task);
     }
 }
