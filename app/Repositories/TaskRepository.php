@@ -93,4 +93,19 @@ class TaskRepository extends Db
             ', $param
         );
     }
+
+    /**
+     * Method for deleting task record from db.
+     *
+     * @param int $taskId
+     * @return boolean
+     */
+    public function deleteTask($taskId)
+    {
+        $param = [
+            'id' => $taskId
+        ];
+
+        return self::saveData('DELETE FROM tasks WHERE id = :id', $param);
+    }
 }

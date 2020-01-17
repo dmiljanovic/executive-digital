@@ -143,4 +143,22 @@ class TaskController extends BaseController
 
         $this->createView('task_view', $task);
     }
+
+    /**
+     * Method for deleting task.
+     *
+     * @param string $taskId
+     */
+    public function deleteTask($taskId)
+    {
+        try {
+            $this->repo->deleteTask((int)$taskId);
+        } catch (\Exception $exception) {
+            Analog::log('Error while deleting task from db: ' . $exception);
+            var_dump($exception);
+            die();
+        }
+
+        header("location: ../../tasks");
+    }
 }
