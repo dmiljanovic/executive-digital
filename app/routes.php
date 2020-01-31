@@ -35,7 +35,7 @@ Route::add('/login', function () {
 Route::add('/logging_in', function () {
     $loginCtrl = new LoginController();
     $loginCtrl->loggingIn();
-});
+}, 'post');
 
 Route::add('/logout', function () {
     $loginCtrl = new LoginController();
@@ -55,7 +55,7 @@ Route::add('/task', function () {
 Route::add('/task_create', function () {
     $taskCtrl = new TaskController(new TaskRepository());
     $taskCtrl->createTask();
-});
+}, 'post');
 
 Route::add('/task/([0-9]*)/edit', function ($taskId) {
     $taskCtrl = new TaskController(new TaskRepository());
@@ -65,7 +65,7 @@ Route::add('/task/([0-9]*)/edit', function ($taskId) {
 Route::add('/task_update', function () {
     $taskCtrl = new TaskController(new TaskRepository());
     $taskCtrl->updateTask();
-});
+}, 'post');
 
 Route::add('/task/([0-9]*)/view', function ($taskId) {
     $taskCtrl = new TaskController(new TaskRepository());
